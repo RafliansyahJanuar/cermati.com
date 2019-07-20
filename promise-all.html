@@ -1,0 +1,35 @@
+<html>
+    <head>
+        <title></title>
+    </head>
+    <body>
+        <h1>Using promise all</h1>
+        <div id="output">
+
+        </div>
+        <script>
+            let log = console.log;
+
+            let datafile1 = fetch('./data.json');
+            let datafile2 = fetch('./data.json');
+
+            Promise.all([datafile1, datafile2])
+            .then( files =>{
+                files.forEach(file=>{
+                    process(file.json());
+                })
+            })
+            .catch(err=>{
+
+            });
+
+            let process = (prom) =>{
+                prom.then(data=>{
+                    let p = document.createElement('p');
+                    p.textContent = data.numbers.join(", ");
+                    document.getElementById('output').appendChild(p);
+                })
+            }
+        </script>
+    </body>
+</html>
